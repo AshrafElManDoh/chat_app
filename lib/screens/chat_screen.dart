@@ -28,7 +28,9 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: ChatBubbleListView(email: email,),
+      body: ChatBubbleListView(
+        email: email,
+      ),
     );
   }
 }
