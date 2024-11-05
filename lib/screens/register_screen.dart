@@ -1,8 +1,7 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/components/custom_text_field.dart';
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
-import 'package:chat_app/cubits/register_cubit/register_cubit.dart';
+import 'package:chat_app/cubits/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +23,7 @@ class RegisterScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Form(
             key: formKey,
-            child: BlocConsumer<RegisterCubit, RegisterState>(
+            child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is RegisterLoading) {
                 } else if (state is RegisterSuccess) {
@@ -90,7 +89,7 @@ class RegisterScreen extends StatelessWidget {
                         text: "Register",
                         ontap: () async {
                           if (formKey.currentState!.validate()) {
-                            await BlocProvider.of<RegisterCubit>(context)
+                            await BlocProvider.of<AuthCubit>(context)
                                 .register(email: email!, password: password!);
                           }
                         },

@@ -1,8 +1,8 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/components/custom_text_field.dart';
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
-import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Form(
             key: formkey,
-            child: BlocConsumer<LoginCubit, LoginState>(
+            child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is LoginLoading) {
                 } else if (state is LoginSuccess) {
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                         text: "Login",
                         ontap: () async {
                           if (formkey.currentState!.validate()) {
-                            await BlocProvider.of<LoginCubit>(context)
+                            await BlocProvider.of<AuthCubit>(context)
                                 .login(email: email!, password: password!);
                           }
                         }),
