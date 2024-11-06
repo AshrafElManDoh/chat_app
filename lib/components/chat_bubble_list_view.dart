@@ -5,11 +5,19 @@ import 'package:chat_app/models/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatBubbleListView extends StatelessWidget {
-  ChatBubbleListView({super.key, required this.email});
+class ChatBubbleListView extends StatefulWidget {
+  const ChatBubbleListView({super.key, required this.email});
   final String email;
+
+  @override
+  State<ChatBubbleListView> createState() => _ChatBubbleListViewState();
+}
+
+class _ChatBubbleListViewState extends State<ChatBubbleListView> {
   TextEditingController controller = TextEditingController();
+
   final scontroller = ScrollController();
+
   List<MessageModel> messageList = [];
 
   @override
@@ -29,7 +37,7 @@ class ChatBubbleListView extends StatelessWidget {
                   controller: scontroller,
                   itemCount: messageList.length,
                   itemBuilder: (context, index) {
-                    return messageList[index].id == email
+                    return messageList[index].id == widget.email
                         ? ChatBubble(
                             message: messageList[index],
                           )
@@ -47,7 +55,7 @@ class ChatBubbleListView extends StatelessWidget {
                 suffixIcon: IconButton(
                   onPressed: () {
                     BlocProvider.of<ChatCubit>(context)
-                        .sendMessage(message: controller.text, email: email);
+                        .sendMessage(message: controller.text, email: widget.email);
                     controller.clear();
                     BlocProvider.of<ChatCubit>(context).receiveMessages();
                     scontroller.animateTo(0,

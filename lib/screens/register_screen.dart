@@ -7,10 +7,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class RegisterScreen extends StatelessWidget {
-  GlobalKey<FormState> formKey = GlobalKey();
+class RegisterScreen extends StatefulWidget {
   static String id = "RegisterScreen";
+
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  GlobalKey<FormState> formKey = GlobalKey();
+
   String? email;
+
   String? password;
 
   @override
