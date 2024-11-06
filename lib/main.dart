@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          LoginScreen.id: (context) =>  LoginScreen(),
-          RegisterScreen.id: (context) =>  RegisterScreen(),
+          LoginScreen.id: (context) => const LoginScreen(),
+          RegisterScreen.id: (context) => const RegisterScreen(),
           ChatScreen.id: (context) => const ChatScreen()
         },
         initialRoute: LoginScreen.id,

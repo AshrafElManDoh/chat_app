@@ -41,7 +41,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (state is LoginLoading) {
                 } else if (state is LoginSuccess) {
                   BlocProvider.of<ChatCubit>(context).receiveMessages();
-                  Navigator.pushNamed(context, ChatScreen.id, arguments: email);
+                  Navigator.pushNamedAndRemoveUntil(context, ChatScreen.id, (route) {
+                    return false;
+                  }, arguments: email);
                 } else if (state is LoginFailure) {
                   showSnackBar(context, state.errmsg);
                 }
@@ -101,10 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     CustomButton(
                         text: "Login",
-                        ontap: ()  {
+                        ontap: () {
                           if (formkey.currentState!.validate()) {
-                             BlocProvider.of<AuthBloc>(context)
-                                .add(LoginEvent(email: email!,password: password!));
+                            BlocProvider.of<AuthBloc>(context).add(
+                                LoginEvent(email: email!, password: password!));
                           }
                         }),
                     const SizedBox(
